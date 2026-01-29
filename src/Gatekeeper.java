@@ -4,17 +4,45 @@ public class Gatekeeper {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        // --- 1. INPUTS ---
-        System.out.println("Enter Age: ");
-        int age = input.nextInt();
+        // Inputs
+        int age;
+        int code;
+        int clearance;
 
-        System.out.println("Enter Security Code: ");
-        int code = input.nextInt();
+        System.out.print("Enter Age: ");
+        age = input.nextInt();
 
-        System.out.println("Clearence Level (1-3): ");
-        int clearence = input.nextInt();
+        System.out.print("Enter Security Code: ");
+        code = input.nextInt();
 
+        System.out.print("Enter Clearance Level: ");
+        clearance = input.nextInt();
 
+        // Boolean Pre-Checks
+        boolean ageValid = (age >= 18 && age <= 65);
+        boolean codeValid = ((code % 5 == 0 || code % 7 == 0) && code % 10 !=0);
+
+        // Control Flow Decisions
+        switch (clearance) {
+            case 1:
+            case 2:
+            case 3:
+                if (!ageValid) {
+                    System.out.println("Access denied: Invalid age.");
+                } else if (!codeValid) {
+                    System.out.println("Access denied: Invalid code.");
+                } else {
+                    System.out.println("Access granted.");
+                }
+                break;
+            default:
+                System.out.println("Access denied: Invalid clearance");
+                break;
+        }
+        // Risk Assessment Based on Age?
+        String riskLevel = (age < 25) ? "High Risk" : (age <= 50 ? "Medium Risk" : "Low Risk");
+
+        System.out.println("Risk Level: " + riskLevel);
 
 
 
